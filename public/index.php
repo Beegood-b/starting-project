@@ -10,4 +10,12 @@ define("PATH", 'http://practice.loc');
 
 require CORE . '/funcs.php';
 
-require CONTROLLERS . '/index.php';
+$uri = trim(parse_url($_SERVER['REQUEST_URI'])['path'], '/');
+
+if ($uri === '') {
+  require CONTROLLERS . '/index.php';
+} elseif ($uri == 'about') {
+  require CONTROLLERS . '/about.php';
+} else {
+  abort();
+}
